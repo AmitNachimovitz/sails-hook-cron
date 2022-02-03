@@ -7,10 +7,9 @@ module.exports = function (sails) {
     defaults: { cron: {} },
 
     initialize: function (cb) {
-      const config = sails.config.cron;
-      const jobs = Object.keys(config);
-
       sails.on('ready', () => {
+        const config = sails.config.cron;
+        const jobs = Object.keys(config);
         jobs.forEach(job => {
           this.jobs[job] = new CronJob(
             config[job].schedule,
